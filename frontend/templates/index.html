@@ -1,327 +1,209 @@
 <!doctype html>
-
 <html lang="en">
 <head>
-<meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1"/>
-
-<title>EduGenie</title>
-
-<link rel="stylesheet" href="style.css"/>
-
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>EduGenie</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
 </head>
 
 <body>
-
-<div class="app-shell">
-
-<!-- SIDEBAR -->
-
-<aside class="sidebar">
-
-<div class="brand">
-<div class="logo">🤖</div>
-
-<div class="brand-text">
-<h2>EduGenie</h2>
-<small>AI-Powered Learning Hub</small>
-</div>
-</div>
-
-<nav class="nav">
-
-<div class="menu-group">
-
-
-
-<div class="submenu">
-
-<button data-view="ask" class="nav-btn active">
-💬 <span>Ask AI</span>
-</button>
-
-<button data-view="explain" class="nav-btn">
-💡 <span>Concept Guide</span>
-</button>
-
-<button data-view="quiz" class="nav-btn">
-🎯 <span>Knowledge Test</span>
-</button>
-
-<button data-view="summarize" class="nav-btn">
-🧾 <span>Quick Notes</span>
-</button>
-
-<button data-view="solve" class="nav-btn">
-🧩 <span> Problem Solver</span>
-</button>
-
-</div>
-
-</div>
-
-</nav>
-
-</aside>
-
-<!-- MAIN -->
-
-<main class="main">
-
-<header class="main-header">
-
-<div class="title-block">
-<h1 id="main-title">Ask Question</h1>
-<p class="subtitle">Premium AI powered academic assistant</p>
-</div>
-
-<div class="header-right">
-
-<label class="theme-toggle">
-<input type="checkbox" id="theme-toggle"/>
-
-<span class="toggle-track">
-<span class="toggle-knob"></span>
-</span>
-
-</label>
-
-</div>
-
-</header>
-
-<section class="content">
-
-<!-- ASK -->
-
-<div id="view-ask" class="card view">
-
-<h2>Ask a Question</h2>
-
-<p class="desc">Get instant AI responses for academic queries.</p>
-
-<form id="form-ask" class="form">
-
-<textarea name="question" rows="4" placeholder="Type your question..."></textarea>
-
-<div class="actions">
-
-<button type="submit" class="btn primary" id="btn-ask">Ask</button>
-
-<button type="button" class="btn ghost" id="clear-ask">Clear</button>
-
-</div>
-
-</form>
-
-<div class="ai-card">
-
-<div class="ai-header">AI Response</div>
-
-<div id="result-ask" class="result"></div>
-
-<div class="actions">
-
-<button type="button" class="btn ghost" id="copy-ask">Copy</button>
-
-<button type="button" class="btn ghost" id="clear-ask-result">Clear</button>
-
-</div>
-
-</div>
-
-</div>
-
-<!-- EXPLAIN -->
-
-<div id="view-explain" class="card view hidden">
-
-<h2>Explain Concept</h2>
-
-<p class="desc">Get simplified explanations for complex topics.</p>
-
-<form id="form-explain" class="form">
-
-<input name="topic" type="text" placeholder="Enter topic"/>
-
-<select name="level">
-<option value="beginner">Beginner</option>
-<option value="intermediate">Intermediate</option>
-<option value="advanced">Advanced</option>
-</select>
-
-<div class="actions">
-
-<button type="submit" class="btn primary" id="btn-explain">Explain</button>
-
-<button type="button" class="btn ghost" id="clear-explain">Clear</button>
-
-</div>
-
-</form>
-
-<div class="ai-card">
-
-<div class="ai-header">AI Response</div>
-
-<div id="result-explain" class="result"></div>
-
-<div class="actions">
-
-<button type="button" class="btn ghost" id="copy-explain">Copy</button>
-
-<button type="button" class="btn ghost" id="clear-explain-result">Clear</button>
-
-</div>
-
-</div>
-
-</div>
-
-<!-- QUIZ -->
-
-<div id="view-quiz" class="card view hidden">
-
-<h2>Generate Quiz</h2>
-
-<p class="desc">Test your knowledge instantly.</p>
-
-<form id="form-quiz" class="form">
-
-<input name="topic" type="text" placeholder="Enter topic"/>
-
-<select name="difficulty">
-<option value="easy">Easy</option>
-<option value="medium">Medium</option>
-<option value="hard">Hard</option>
-</select>
-
-<input name="num_questions" type="number" min="1" max="20" value="5"/>
-
-<div class="actions">
-
-<button type="submit" class="btn primary" id="btn-quiz">Generate Quiz</button>
-
-<button type="button" class="btn ghost" id="clear-quiz">Clear</button>
-
-</div>
-
-</form>
-
-<div class="ai-card">
-
-<div class="ai-header">Quiz</div>
-
-<div id="quiz-container" class="result"></div>
-
-<div class="actions">
-
-<button type="button" class="btn ghost" id="copy-quiz">Copy</button>
-
-<button type="button" class="btn ghost" id="clear-quiz-result">Clear</button>
-
-</div>
-
-</div>
-
-</div>
-
-<!-- SUMMARIZE -->
-
-<div id="view-summarize" class="card view hidden">
-
-<h2>Summarize Text</h2>
-
-<p class="desc">Paste notes or articles to get short summaries.</p>
-
-<form id="form-summarize" class="form">
-
-<textarea name="text" rows="6" placeholder="Paste text here"></textarea>
-
-<div class="actions">
-
-<button type="submit" class="btn primary" id="btn-summarize">Summarize</button>
-
-<button type="button" class="btn ghost" id="clear-summarize">Clear</button>
-
-</div>
-
-</form>
-
-<div class="ai-card">
-
-<div class="ai-header">AI Response</div>
-
-<div id="result-summarize" class="result"></div>
-
-<div class="actions">
-
-<button type="button" class="btn ghost" id="copy-summarize">Copy</button>
-
-<button type="button" class="btn ghost" id="clear-summarize-result">Clear</button>
-
-</div>
-
-</div>
-
-</div>
-
-<!-- SOLVE -->
-
-<div id="view-solve" class="card view hidden">
-
-<h2>Step-by-Step Solve</h2>
-
-<p class="desc">Solve problems with detailed steps.</p>
-
-<form id="form-solve" class="form">
-
-<textarea name="problem" rows="5" placeholder="Enter problem"></textarea>
-
-<div class="actions">
-
-<button type="submit" class="btn primary" id="btn-solve">Solve</button>
-
-<button type="button" class="btn ghost" id="clear-solve">Clear</button>
-
-</div>
-
-</form>
-
-<div class="ai-card">
-
-<div class="ai-header">AI Response</div>
-
-<div id="result-solve" class="result"></div>
-
-<div class="actions">
-
-<button type="button" class="btn ghost" id="copy-solve">Copy</button>
-
-<button type="button" class="btn ghost" id="clear-solve-result">Clear</button>
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-</main>
-
-</div>
-
-<script src="{{ url_for('static', filename='js/app.js') }}"></script>
-
-<script>
-document.querySelectorAll(".menu-toggle").forEach(btn=>{
-btn.addEventListener("click",()=>{
-btn.parentElement.classList.toggle("active");
-});
-});
-</script>
-
+  <div class="app-shell">
+
+    <!-- ================= SIDEBAR ================= -->
+    <aside class="sidebar" role="navigation">
+      <div class="brand">
+        <div class="logo">✨</div>
+        <div class="brand-text">
+          <h2>EduGenie</h2>
+          <small>Premium AI Academic Assistant</small>
+        </div>
+      </div>
+
+      <nav class="nav">
+        <button data-view="ask" class="nav-btn active">🧠 <span>Ask</span></button>
+        <button data-view="explain" class="nav-btn">📖 <span>Explain</span></button>
+        <button data-view="quiz" class="nav-btn">📝 <span>Quiz</span></button>
+        <button data-view="summarize" class="nav-btn">📄 <span>Summarize</span></button>
+        <button data-view="solve" class="nav-btn">➗ <span>Solve</span></button>
+      </nav>
+    </aside>
+
+    <!-- ================= MAIN ================= -->
+    <main class="main">
+
+      <!-- HEADER -->
+      <header class="main-header">
+        <div class="title-block">
+          <h1 id="main-title">Ask Question</h1>
+          <p class="subtitle">
+            Premium AI-powered academic assistance designed for smarter learning.
+          </p>
+        </div>
+
+        <div class="header-right">
+          <label class="theme-toggle" title="Toggle Light / Dark Mode">
+            <input type="checkbox" id="theme-toggle" />
+            <span class="toggle-track">
+              <span class="toggle-knob"></span>
+            </span>
+          </label>
+        </div>
+      </header>
+
+      <!-- CONTENT -->
+      <section class="content">
+
+        <!-- ================= ASK ================= -->
+        <div id="view-ask" class="card view">
+          <h2>Ask a Question</h2>
+          <p class="desc">
+            Get instant, structured AI responses for your academic questions.
+          </p>
+
+          <form id="form-ask" class="form">
+            <textarea name="question" rows="4" placeholder="Type your question here..."></textarea>
+
+            <div class="actions">
+              <button type="submit" class="btn primary" id="btn-ask">🧠 Ask</button>
+              <button type="button" class="btn ghost" id="clear-ask">Clear</button>
+            </div>
+          </form>
+
+          <div class="ai-card">
+            <div class="ai-header">🤖 AI Response</div>
+            <div id="result-ask" class="result"></div>
+
+            <div class="actions">
+              <button type="button" class="btn ghost" id="copy-ask">Copy</button>
+              <button type="button" class="btn ghost" id="clear-ask-result">Clear</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ================= EXPLAIN ================= -->
+        <div id="view-explain" class="card view hidden">
+          <h2>Explain a Concept</h2>
+          <p class="desc">
+            Get step-by-step explanations tailored to your learning level.
+          </p>
+
+          <form id="form-explain" class="form">
+            <input name="topic" type="text" placeholder="Enter topic..." />
+            <select name="level">
+              <option value="beginner">Beginner</option>
+              <option value="intermediate">Intermediate</option>
+              <option value="advanced">Advanced</option>
+            </select>
+
+            <div class="actions">
+              <button type="submit" class="btn primary" id="btn-explain">📖 Explain</button>
+              <button type="button" class="btn ghost" id="clear-explain">Clear</button>
+            </div>
+          </form>
+
+          <div class="ai-card">
+            <div class="ai-header">🤖 AI Response</div>
+            <div id="result-explain" class="result"></div>
+
+            <div class="actions">
+              <button type="button" class="btn ghost" id="copy-explain">Copy</button>
+              <button type="button" class="btn ghost" id="clear-explain-result">Clear</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ================= QUIZ ================= -->
+        <div id="view-quiz" class="card view hidden">
+          <h2>Generate a Quiz</h2>
+          <p class="desc">
+            Create quick quizzes to test your understanding instantly.
+          </p>
+
+          <form id="form-quiz" class="form">
+            <input name="topic" type="text" placeholder="Enter topic..." />
+            <select name="difficulty">
+              <option value="easy">Easy</option>
+              <option value="medium">Medium</option>
+              <option value="hard">Hard</option>
+            </select>
+            <input name="num_questions" type="number" min="1" max="20" value="5" />
+
+            <div class="actions">
+              <button type="submit" class="btn primary" id="btn-quiz">📝 Generate Quiz</button>
+              <button type="button" class="btn ghost" id="clear-quiz">Clear</button>
+            </div>
+          </form>
+
+          <div class="ai-card">
+            <div class="ai-header">📝 Quiz</div>
+            <div id="quiz-container" class="result"></div>
+
+            <div class="actions">
+              <button type="button" class="btn ghost" id="copy-quiz">Copy</button>
+              <button type="button" class="btn ghost" id="clear-quiz-result">Clear</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ================= SUMMARIZE ================= -->
+        <div id="view-summarize" class="card view hidden">
+          <h2>Summarize Text</h2>
+          <p class="desc">
+            Paste notes or articles and get a concise summary.
+          </p>
+
+          <form id="form-summarize" class="form">
+            <textarea name="text" rows="6" placeholder="Paste text here..."></textarea>
+
+            <div class="actions">
+              <button type="submit" class="btn primary" id="btn-summarize">📄 Summarize</button>
+              <button type="button" class="btn ghost" id="clear-summarize">Clear</button>
+            </div>
+          </form>
+
+          <div class="ai-card">
+            <div class="ai-header">🤖 AI Response</div>
+            <div id="result-summarize" class="result"></div>
+
+            <div class="actions">
+              <button type="button" class="btn ghost" id="copy-summarize">Copy</button>
+              <button type="button" class="btn ghost" id="clear-summarize-result">Clear</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ================= SOLVE ================= -->
+        <div id="view-solve" class="card view hidden">
+          <h2>Step-by-Step Solve</h2>
+          <p class="desc">
+            Enter a problem and receive a detailed step-by-step solution.
+          </p>
+
+          <form id="form-solve" class="form">
+            <textarea name="problem" rows="5" placeholder="Enter problem here..."></textarea>
+
+            <div class="actions">
+              <button type="submit" class="btn primary" id="btn-solve">➗ Solve</button>
+              <button type="button" class="btn ghost" id="clear-solve">Clear</button>
+            </div>
+          </form>
+
+          <div class="ai-card">
+            <div class="ai-header">🤖 AI Response</div>
+            <div id="result-solve" class="result"></div>
+
+            <div class="actions">
+              <button type="button" class="btn ghost" id="copy-solve">Copy</button>
+              <button type="button" class="btn ghost" id="clear-solve-result">Clear</button>
+            </div>
+          </div>
+        </div>
+
+      </section>
+    </main>
+  </div>
+
+  <script src="{{ url_for('static', filename='js/app.js') }}"></script>
 </body>
 </html>
