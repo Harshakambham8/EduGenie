@@ -1,4 +1,5 @@
 #🧞‍♂️ EduGenie 
+
 🎓– Google Gemini Powered Learning Assistant
 
 EduGenie is a premium AI-powered academic assistant built using Flask and Google Gemini.
